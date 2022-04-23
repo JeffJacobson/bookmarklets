@@ -1,0 +1,11 @@
+{
+  "name": "bookmarklets",
+  "version": "1.0.0",
+  "description": "Bookmarklets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jeff Jacobson",
+  "license": "Unlicense"
+}
