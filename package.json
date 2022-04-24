@@ -2,10 +2,21 @@
   "name": "bookmarklets",
   "version": "1.0.0",
   "description": "Bookmarklets",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jeff Jacobson",
-  "license": "Unlicense"
+  "license": "Unlicense",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JeffJacobson/bookmarklets.git"
+  },
+  "keywords": [
+    "bookmarklets"
+  ],
+  "bugs": {
+    "url": "https://github.com/JeffJacobson/bookmarklets/issues"
+  },
+  "homepage": "https://github.com/JeffJacobson/bookmarklets#readme"
 }
