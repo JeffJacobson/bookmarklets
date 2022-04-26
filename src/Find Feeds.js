@@ -52,10 +52,28 @@
     }
     frag.appendChild(list);
 
-    const div = document.createElement("div");
-    div.classList.add(bookmarkletClass);
-    div.append(frag);
+    const dialog = document.createElement("dialog");
+    dialog.classList.add(bookmarkletClass);
+    dialog.append(frag);
 
-    // document.body.querySelectorAll(`[class*="${bookmarkletClass}"]`);
-    document.body.prepend(div);
+    const closeButton = document.createElement("button");
+    closeButton.innerText = "Close";
+    dialog.append(closeButton);
+
+    closeButton.addEventListener("click", () => {
+        dialog.close();
+        dialog.remove();
+    }, {
+        once: true,
+        passive: true
+    });
+
+    // Remove existing dialogs.
+    const existingDialogs = document.body.querySelectorAll(`.${bookmarkletClass}`);
+    if (existingDialogs) {
+        existingDialogs.forEach(d => d.remove());
+    }
+    // Add the dialog to the document and open it.
+    document.body.prepend(dialog);
+    dialog.showModal();
 })()
