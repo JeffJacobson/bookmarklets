@@ -76,4 +76,4 @@
     // Add the dialog to the document and open it.
     document.body.prepend(dialog);
     dialog.showModal();
-})()
+})();

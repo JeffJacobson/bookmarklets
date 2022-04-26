@@ -3,7 +3,7 @@
  * bookmarklet equivalents to the dest directory.
  */
 import { mkdir, readdir, readFile, writeFile, rm, access } from "fs/promises";
-import { constants, existsSync, write } from "fs";
+import { constants, existsSync } from "fs";
 import path from "path";
 
 /**
@@ -51,13 +51,11 @@ const destinationDir = "dest";
  */
 async function transpile() {
     if (existsSync(destinationDir)) {
-        console.debug(`removing ${destinationDir}`)
         await rm(destinationDir, {
             recursive: true
         });
     }
 
-    console.debug(`creating ${destinationDir}`);
     mkdir(destinationDir);
 
     const files = await readdir(sourceDir, {
@@ -66,7 +64,6 @@ async function transpile() {
     for await (const file of files) {
         // Skip if item isn't a file.
         if (!file.isFile()) continue;
-        console.debug(file);
         const inPath = path.join(sourceDir, file.name);
         const outPath = path.join(destinationDir, file.name);
         const fileContent = await readFile(inPath, {
@@ -90,26 +87,18 @@ async function transpile() {
  * @yields {[string, string]} An array with the file name and content, respectively.
  */
 async function* readFilesContents(dir) {
-    console.group("readFilesContents");
-    try {
-        const files = await readdir(destinationDir, {
-            withFileTypes: true
+    const files = await readdir(destinationDir, {
+        withFileTypes: true
+    });
+    for await (const file of files) {
+        // Skip if item isn't a file.
+        if (!file.isFile()) continue;
+        const filePath = path.join(dir, file.name);
+        const fileContent = await readFile(filePath, {
+            encoding: "utf-8",
+            flag: constants.O_RDONLY
         });
-        for await (const file of files) {
-            // Skip if item isn't a file.
-            if (!file.isFile()) continue;
-            const filePath = path.join(dir, file.name);
-            console.debug("filePath", filePath);
-            const fileContent = await readFile(filePath, {
-                encoding: "utf-8",
-                flag: constants.O_RDONLY
-            });
-            console.debug("fileContent", fileContent);
-            yield [file.name, fileContent];
-        }
-    }
-    finally {
-        console.groupEnd();
+        yield [file.name, fileContent];
     }
 }
 
@@ -121,8 +110,6 @@ async function updateMarkdown() {
         encoding: "utf-8",
         flag: constants.O_RDONLY
     });
-
-    console.debug("template text", content);
 
     const outputParts = [];
 
@@ -140,11 +127,9 @@ async function updateMarkdown() {
     const outputFile = "README.md";
 
     if (await access(outputFile, constants.R_OK | constants.W_OK)) {
-        console.log(`Deleting ${outputFile}`);
         await rm(outputFile, {
             force: true
         });
-        console.log(`Deleted ${outputFile}`);
     }
 
 

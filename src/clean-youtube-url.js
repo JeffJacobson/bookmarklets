@@ -3,7 +3,7 @@
  */
 (() => {
     if (!location.origin.search(/youtube\.com/)) {
-        console.warn("This bookmarklet is only designed for YouTube.")
+        console.warn("This bookmarklet is only designed for YouTube.");
     }
     const url = new URL(location.href);
     const keysToKeep = /^v$/i;

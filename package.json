@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Bookmarklets",
   "private": true,
+  "type": "module",
   "scripts": {
-    "prepare": "node tools/convert.mjs"
+    "prepare": "eslint **/*.js --fix && node tools/convert.mjs"
   },
   "author": "Jeff Jacobson",
   "license": "Unlicense",
@@ -18,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/JeffJacobson/bookmarklets/issues"
   },
-  "homepage": "https://github.com/JeffJacobson/bookmarklets#readme"
+  "homepage": "https://github.com/JeffJacobson/bookmarklets#readme",
+  "devDependencies": {
+    "eslint": "^8.14.0"
+  }
 }

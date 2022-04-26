@@ -3,7 +3,7 @@
  */
 (() => {
     // Matches an Amazon URL
-    const amazonRe = /(?<=^https:\/\/)(?:[^\.]+\.)?(amazon\.co(?:m|(?:\.[a-z]{2})))/i;
+    const amazonRe = /(?<=^https:\/\/)(?:[^.]+\.)?(amazon\.co(?:m|(?:\.[a-z]{2})))/i;
 
     const newUrl = location.href.replace(amazonRe, "smile.$1");
 
