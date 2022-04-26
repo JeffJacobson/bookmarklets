@@ -1,3 +1,7 @@
+/**
+ * Finds Atom, RSS, and Activity JSON feeds defined in a page 
+ * and displays them as links in a dialog.
+ */
 (() => {
     
     // Name of class that will be used for content that will
