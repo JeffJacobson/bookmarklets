@@ -14,6 +14,7 @@
     const types = [
         "application/atom+xml",
         "application/rss+xml",
+        "application/feed+json",
         "application/activity+json"
     ];
     // Convert the array of types into a query selector string.
@@ -24,7 +25,7 @@
 
     if (!feedLinks.length) {
         const message = "No feed links were found.";
-        console.log(message);
+        alert(message);
         return;
     }
 
