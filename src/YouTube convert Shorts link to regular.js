@@ -29,7 +29,7 @@
      * Replaces all of the YouTube Shorts links with regular links.
      */
     function replaceShortsLinks() {
-        const shortsLinks = document.body.querySelectorAll("a[href='https://www.youtube.com/shorts/]");
+        const shortsLinks = document.body.querySelectorAll("a[href*='/shorts/']");
         for (const link of shortsLinks) {
             const newHref = getRegularUrlFromShortsUrl(link.href);
             if (link.href === newHref) {
@@ -40,12 +40,18 @@
         }
     }
 
-    function replaceCurrentShortsURL() {
+    /**
+     * If the current URL is a "shorts" URL, redirect the browser.
+     * Otherwise, do nothing.
+     */
+    function redirectFromShortsUrl() {
         const oldUrl = location.href;
         const newUrl = getRegularUrlFromShortsUrl(oldUrl);
-        history.pushState({ oldUrl, newUrl }, null, newUrl);
+        if (oldUrl !== newUrl) {
+            open(newUrl);
+        }
     }
 
-    replaceCurrentShortsURL();
+    redirectFromShortsUrl();
     replaceShortsLinks();
 })();
