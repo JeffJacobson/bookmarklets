@@ -37,6 +37,11 @@ function removeNewlines(input) {
     return output;
 }
 
+/**
+ * Replaces mutliple consecutive spaces with a single space character.
+ * @param {string} input Input string
+ * @returns A copy of the input string with extra spaces removed.
+ */
 function removeExtraSpaces(input) {
     const re = /\s{2,}/gm;
     const output = input.replaceAll(re, " ");
@@ -50,14 +55,17 @@ const destinationDir = "dest";
  * Remove newlines and comments.
  */
 async function transpile() {
+    // Remove the destination directory if it already exists.
     if (existsSync(destinationDir)) {
         await rm(destinationDir, {
             recursive: true
         });
     }
 
+    // Create the output directory.
     mkdir(destinationDir);
 
+    // Read the contents of the JavaScript files in the source directory.
     const files = await readdir(sourceDir, {
         withFileTypes: true
     });
