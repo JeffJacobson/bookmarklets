@@ -28,6 +28,12 @@ javascript:/** * Finds Atom, RSS, and Activity JSON feeds defined in a page * an
 ```javascript
 javascript:/** * Go to Amazon Smile equivalent site. */(() => { const amazonRe = /(?<=^https:\/\/)(?:[^.]+\.)?(amazon\.co(?:m|(?:\.[a-z]{2})))/i; const newUrl = location.href.replace(amazonRe, "smile.$1"); open(newUrl, "_top");})();
 ```
+## Hide Sponsored posts on Facebook.js
+
+
+```javascript
+javascript:(() => { const paidSocialItems = document.body.querySelectorAll("[href*='utm_medium=paid_social']"); const items = Array.from(paidSocialItems).map(i => i.parentElement .parentElement .parentElement .parentElement .parentElement .parentElement .parentElement); items.forEach(i => i.hidden = true); console.log(items);})();
+```
 ## Remove playlist params from YouTube video links.js
 
 
