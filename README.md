@@ -10,6 +10,12 @@ This repository contains code for bookmarklets. If you don't know what a bookmar
 ```javascript
 javascript:/** * Remove all params from a YouTube URL except for "v". */(() => { if (!location.origin.search(/youtube\.com/)) { console.warn("This bookmarklet is only designed for YouTube."); } const url = new URL(location.href); const keysToKeep = /^v$/i; const keys = Array.from(url.searchParams.keys()).filter(k => !keysToKeep.test(k)); console.log(keys); keys.forEach(k => url.searchParams.delete(k)); history.pushState(url.searchParams, document.title, url);})();
 ```
+## Costco List Total.js
+
+
+```javascript
+javascript:/** * When looking at a list on Costco.com, this script will * give you a total for all the items currently in the list. */(() => { /** * List of all if the items on the list. * @type {NodeListOf<HTMLLIElement>} */ const items = document.querySelectorAll("li.item-position"); let total = 0; for (const item of items) { console.group(`sequence ${item.attributes["sequence"].value}`); /** @type {HTMLInputElement} */ const quantitySelector = item.querySelector("[id^='quantity_']"); /** The quantity of the current item. */ const quantity = parseInt(quantitySelector.value); /** * Get the <span> containing the price. * @type {HTMLSpanElement} */ const itemPriceSpan = item.querySelector("[automation-id^='itemPrice_']"); /** The price of the current item */ const itemPrice = parseFloat(itemPriceSpan.textContent.replace("$", "")); /** The current price ⨉ quantity */ const subtotal = itemPrice * quantity; console.log("quantity", quantity); console.log("price", itemPrice); console.log("sub total", itemPrice * quantity); total += subtotal; console.groupEnd(); } console.log("total", total);})();
+```
 ## Find Feeds.js
 
 
