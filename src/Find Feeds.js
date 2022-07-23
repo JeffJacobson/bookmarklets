@@ -3,7 +3,6 @@
  * and displays them as links in a dialog.
  */
 (() => {
-
     /**
      * Finds all of the links that look like RSS, Atom, etc., feeds.
      * @returns {NodeListOf<HTMLLinkElement>} - A node list of elements.
@@ -127,6 +126,30 @@
         return list;
     }
 
+    function createDialog() {
+        const dialog = document.createElement("dialog");
+        dialog.classList.add(bookmarkletClass);
+
+        const closeButton = document.createElement("button");
+        closeButton.innerText = "Close";
+        dialog.append(closeButton);
+
+        closeButton.addEventListener("click", () => {
+            dialog.close();
+            dialog.remove();
+        }, {
+            once: true,
+            passive: true
+        });
+
+        // Remove existing dialogs.
+        const existingDialogs = document.body.querySelectorAll(`.${bookmarkletClass}`);
+        if (existingDialogs) {
+            existingDialogs.forEach(d => d.remove());
+        }
+        return dialog;
+    }
+
 
     // Name of class that will be used for content that will
     // be added by this bookmarklet.
@@ -151,31 +174,11 @@
         frag.append(anchorList);
     }
 
-    const dialog = document.createElement("dialog");
-    dialog.classList.add(bookmarkletClass);
+    const dialog = createDialog();
     dialog.append(frag);
 
-    const closeButton = document.createElement("button");
-    closeButton.innerText = "Close";
-    dialog.append(closeButton);
-
-    closeButton.addEventListener("click", () => {
-        dialog.close();
-        dialog.remove();
-    }, {
-        once: true,
-        passive: true
-    });
-
-    // Remove existing dialogs.
-    const existingDialogs = document.body.querySelectorAll(`.${bookmarkletClass}`);
-    if (existingDialogs) {
-        existingDialogs.forEach(d => d.remove());
-    }
     // Add the dialog to the document and open it.
     document.body.prepend(dialog);
     dialog.showModal();
-
-
 })();
 
