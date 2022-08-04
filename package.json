@@ -5,7 +5,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "prepare": "eslint **/*.js --fix && node tools/convert.mjs"
+    "prepare": "tsc && npm run markdown",
+    "lint": "eslint **/*.js --fix",
+    "markdown": "node tools/convert.mjs"
   },
   "author": "Jeff Jacobson",
   "license": "Unlicense",
@@ -21,6 +23,8 @@
   },
   "homepage": "https://github.com/JeffJacobson/bookmarklets#readme",
   "devDependencies": {
-    "eslint": "^8.14.0"
+    "eslint": "^8.14.0",
+    "minify": "^9.1.0",
+    "typescript": "^4.7.4"
   }
 }

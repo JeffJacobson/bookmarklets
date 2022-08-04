@@ -21,10 +21,10 @@
             "error",
             "windows"
         ],
-        "quotes": [
-            "error",
-            "double"
-        ],
+        "no-unused-expressions": "warn",
+        "no-unused-labels": "warn",
+        "no-unused-vars": "warn",
+        "quotes": "off",
         "semi": [
             "error",
             "always"

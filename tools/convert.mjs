@@ -7,7 +7,7 @@ import { constants } from "fs";
 import path from "path";
 import { minify } from "minify";
 
-const destinationDir = "dest";
+const destinationDir = "dist";
 
 /**
  * Reads the contents of the files in a directory

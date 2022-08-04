@@ -1,0 +1,25 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "typescript",
+			"tsconfig": "tsconfig.json",
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build",
+			"label": "tsc: build - tsconfig.json"
+		},
+		{
+			"type": "npm",
+			"script": "prepare",
+			"problemMatcher": [],
+			"label": "npm: prepare",
+			"detail": "tsc && npm run markdown",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
