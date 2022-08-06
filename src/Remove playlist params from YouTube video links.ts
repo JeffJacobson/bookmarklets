@@ -6,7 +6,7 @@
 
 (() => {
     /** @type {NodeListOf<HTMLAnchorElement>} */
-    const videoLinks = document.body.querySelectorAll("a[href^='/watch?']");
+    const videoLinks = document.body.querySelectorAll<HTMLAnchorElement>("a[href^='/watch?']");
 
     // These are the URL search parameters that will be removed from the href attributes.
     const paramsToRemove = ["list", "index"];

@@ -9,26 +9,33 @@
          * List of all if the items on the list.
          * @type {NodeListOf<HTMLLIElement>}
          */
-        const items = document.querySelectorAll("li.item-position");
+        const items = document.querySelectorAll<HTMLLIElement>("li.item-position");
 
         let total = 0;
 
         for (const item of items) {
-            console.group(`sequence ${item.attributes["sequence"].value}`);
+            console.group(`sequence ${item.attributes.getNamedItem("sequence")?.value}`);
 
             // Get the quantity of the current item.
-            /** @type {HTMLInputElement} */
-            const quantitySelector = item.querySelector("[id^='quantity_']");
+            const quantitySelector = item.querySelector<HTMLInputElement>("[id^='quantity_']");
+
+            if (quantitySelector?.value == null) {
+                throw new TypeError("Could not get a value.");
+            }
+
             /** The quantity of the current item. */
             const quantity = parseInt(quantitySelector.value);
             // Get the price of the current item.
-            /**
-             * Get the <span> containing the price.
-             * @type {HTMLSpanElement}
-             */
-            const itemPriceSpan = item.querySelector("[automation-id^='itemPrice_']");
+
+            // Get the <span> containing the price.
+            const itemPriceSpan = item.querySelector<HTMLSpanElement>("[automation-id^='itemPrice_']");
+            
+            if (itemPriceSpan?.textContent == null) {
+                throw new TypeError("could not find item price <span>");
+            }
 
             // Parse the price after removing the "$".
+            
             /** The price of the current item */
             const itemPrice = parseFloat(itemPriceSpan.textContent.replace("$", ""));
             /** The current price ⨉ quantity */

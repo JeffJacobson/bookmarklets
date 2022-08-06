@@ -6,14 +6,45 @@ To use, drag the links below up to your browsers bookmarks toolbar.
 
 [Bookmarklets on Wikipedia]:https://en.wikipedia.org/wiki/Bookmarklet
 
-* <a href="javascript:(()=>{location.origin.search(/youtube\.com/)||console.warn(&quot;This bookmarklet is only designed for YouTube.&quot;);const e=new URL(location.href),o=/^v$/i,r=Array.from(e.searchParams.keys()).filter((e=>!o.test(e)));console.log(r),r.forEach((o=>e.searchParams.delete(o))),history.pushState(e.searchParams,document.title,e)})();">clean-youtube-url.js</a>
-* <a href="javascript:!function(){const e=document.querySelectorAll(&quot;li.item-position&quot;);let o=0;for(const t of e){console.group(`sequence ${t.attributes.sequence.value}`);const e=t.querySelector(&quot;[id^='quantity_']&quot;),l=parseInt(e.value),n=t.querySelector(&quot;[automation-id^='itemPrice_']&quot;),c=parseFloat(n.textContent.replace(&quot;{{bookmarklets}}quot;,&quot;&quot;)),s=c*l;console.log(&quot;quantity&quot;,l),console.log(&quot;price&quot;,c),console.log(&quot;sub total&quot;,c*l),o+=s,console.groupEnd()}console.log(&quot;total&quot;,o)}();">Costco List Total.js</a>
-* <a href="javascript:(()=>{function e(e){const n=document.createElement(&quot;a&quot;);n.href=e.href;const t=document.createElement(&quot;code&quot;);return t.textContent=e.outerHTML,n.appendChild(t),n}const n=&quot;feeds-cc0a1783-0569-458e-89d1-28dd6872bbef&quot;,t=function(){const e=[&quot;application/atom+xml&quot;,&quot;application/rss+xml&quot;,&quot;application/feed+json&quot;,&quot;application/activity+json&quot;].map((e=>`link[type=&quot;${e}&quot;]`)).join(&quot;,&quot;);return document.querySelectorAll(e)}(),o=function(){const e=[&quot;RSS&quot;,&quot;ATOM&quot;,&quot;JSON Feed&quot;,&quot;JsonFeed&quot;,&quot;feed&quot;],n=e.map((e=>[`a[title*='${e}'i]`,`a[href*='${e}'i]`].join(&quot;,&quot;))).join(&quot;,&quot;),t=document.querySelectorAll(n);if(t.length<1)return null;const o=new RegExp(`\b(?:${e.map((e=>`(?:${e})`)).join(&quot;|&quot;)})\b`,&quot;ig&quot;),c=document.createDocumentFragment();c.append(...function*(e=t,n=o){for(const t of e){const e=t.cloneNode(!0),o=document.createElement(&quot;li&quot;);o.appendChild(e);const c=[t.href,t.title].filter((e=>null!=e)).map((e=>e.match(n))).filter((e=>null!=e)).map((e=>e[0].replace(/[\s]+/i,&quot;-&quot;).toLowerCase()));c&&o.classList.add(...c),yield o}}(t));const l=document.createElement(&quot;ul&quot;);return l.append(c),l}();if(!t.length&&!o){return void alert(&quot;No feed links were found.&quot;)}const c=function(n){const t=document.createDocumentFragment(),o=document.createElement(&quot;ul&quot;);for(const t of Array.from(n)){const n=e(t),c=document.createElement(&quot;li&quot;);c.appendChild(n),o.appendChild(c)}return t.appendChild(o),t}(t);o&&c.append(o);const l=function(){const e=document.createElement(&quot;dialog&quot;);e.classList.add(n);const t=document.createElement(&quot;button&quot;);t.innerText=&quot;Close&quot;,e.append(t),t.addEventListener(&quot;click&quot;,(()=>{e.close(),e.remove()}),{once:!0,passive:!0});const o=document.body.querySelectorAll(`.${n}`);return o&&o.forEach((e=>e.remove())),e}();l.append(c),document.body.prepend(l),l.showModal()})();">Find Feeds.js</a>
-* <a href="javascript:(async()=>{try{await async function(){return new Promise(((e,t)=>{try{const n=document.body.querySelector(&quot;ytd-guide-collapsible-entry-renderer[can-show-more=''] > ytd-guide-entry-renderer > a#endpoint[title^='Show']&quot;);n?(n.addEventListener(&quot;click&quot;,(t=>{e(t.target)}),{once:!0,passive:!0}),n.click()):t('could not find the Subscription &quot;expand&quot; link')}catch(e){t(e)}}))}()}catch(e){return void console.error(&quot;error clicking expand link&quot;,e)}function e(e){const t=e.href;return{href:function(e){const t=(e instanceof URL?e.pathname:e).match(/^https?:\/\/(?:\w+\.)youtube\.com\/(?:\b(?<channelType>(c(hannel)?)|(user))\b\/)?(?<idOrUserName>[^/]+)/i);if(!t)throw new TypeError(`Could not parse URL: ${e}`);return`https://www.youtube.com/feeds/videos.xml?channel_id=${t.groups.idOrUserName}`}(e.href),htmlHref:t,title:e.title}}const t=[...function*(...t){for(const n of t)yield e(n)}([...document.querySelectorAll(&quot;#guide-section-title&quot;)].filter((e=>&quot;Subscriptions&quot;===e.textContent))[0].parentElement.parentElement.querySelectorAll(&quot;#items #endpoint&quot;))].sort((function(e,t){return e.title>t.title?-1:e.title<t.title?1:0}))})();">Get YouTube Subscription Feeds.js</a>
-* <a href="javascript:(()=>{const e=document.querySelectorAll(&quot;ytd-transcript-segment-renderer [aria-label]&quot;);for(const t of function*(e){const t=/^(?<timecode>(?:(?:\d+)\s(?:(?:hours)|(?:minutes)|(?:seconds))(?:,\s)?)+)\s+(?<text>.+?)$/i,o=/(\d+)\s((?:hours)|(?:minutes)|(?:seconds))/gi;for(const s of e){const e=s.getAttribute(&quot;aria-label&quot;).match(t);if(!e)continue;const[n,c]=e.slice(1),i=n.matchAll(o);if(!i)continue;const l=[...i].map((e=>e.slice(1).map(((e,t)=>0===t?parseInt(e):e))));console.log(l,c),yield[l,c]}}(e))console.debug(t)})();">Get YouTube video transcript.js</a>
-* <a href="javascript:(()=>{const o=location.href.replace(/(?<=^https:\/\/)(?:[^.]+\.)?(amazon\.co(?:m|(?:\.[a-z]{2})))/i,&quot;smile.$1&quot;);open(o,&quot;_top&quot;)})();">Go to Amazon Smile.js</a>
-* <a href="javascript:(()=>{const e=document.body.querySelectorAll(&quot;[href*='utm_medium=paid_social']&quot;),n=Array.from(e).map((e=>e.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement));n.forEach((e=>e.hidden=!0)),console.log(n)})();">Hide Sponsored posts on Facebook.js</a>
-* <a href="javascript:(()=>{const e=document.body.querySelectorAll(&quot;a[href^='/watch?']&quot;),r=[&quot;list&quot;,&quot;index&quot;];for(const o of e){const e=new URL(o.href);r.forEach((r=>e.searchParams.delete(r))),o.href=e.href}})();">Remove playlist params from YouTube video links.js</a>
-* <a href="javascript:(()=>{function o(o){console.debug(&quot;shorts URL&quot;,o);const e=o.match(/(?<root>https:\/\/(?:www\.)?youtube.com\/)shorts\/(?<videoId>[^/]+)/i);if(!e)return console.warn(&quot;This does not appear to be a YouTube Shorts URL&quot;),o;const t=e.groups.videoId;console.debug(&quot;video ID&quot;,t);const n=`${e.groups.root}watch?v=${e.groups.videoId}`;return console.debug(&quot;output URL&quot;,n),n}!function(){const e=location.href,t=o(e);e!==t&&open(t)}(),function(){const e=document.body.querySelectorAll(&quot;a[href*='/shorts/']&quot;);for(const t of e){const e=o(t.href);t.href!==e&&(console.log(`replacing ${t.href} with ${e}`),t.href=e)}}()})();">YouTube convert Shorts link to regular.js</a>
-* <a href="javascript:document.body.querySelectorAll(&quot;ytd-playlist-video-list-renderer > #contents > ytd-playlist-video-renderer&quot;);">YouTube Watch Later.js</a>
-* <a href="javascript:export{};">YouTubeUtils.js</a>
+## clean-youtube-url.js
+
+```javascript
+javascript:(()=>{location.origin.search(/youtube\.com/)||console.warn("This bookmarklet is only designed for YouTube.");const e=new URL(location.href),o=/^v$/i,r=Array.from(e.searchParams.keys()).filter((e=>!o.test(e)));console.log(r),r.forEach((o=>e.searchParams.delete(o))),history.pushState(e.searchParams,document.title,e)})();
+```
+
+## Costco List Total.js
+
+```javascript
+javascript:!function(){const e=document.querySelectorAll("li.item-position");let o=0;for(const t of e){console.group(`sequence ${t.attributes.getNamedItem("sequence")?.value}`);const e=t.querySelector("[id^='quantity_']");if(null==e?.value)throw new TypeError("Could not get a value.");const n=parseInt(e.value),l=t.querySelector("[automation-id^='itemPrice_']");if(null==l?.textContent)throw new TypeError("could not find item price <span>");const r=parseFloat(l.textContent.replace("$","")),c=r*n;console.log("quantity",n),console.log("price",r),console.log("sub total",r*n),o+=c,console.groupEnd()}console.log("total",o)}();
+```
+
+## Find Feeds.js
+
+```javascript
+javascript:(()=>{function e(e){const n=document.createElement("a");n.href=e.href;const t=document.createElement("code");return t.textContent=e.outerHTML,n.appendChild(t),n}const n="feeds-cc0a1783-0569-458e-89d1-28dd6872bbef",t=function(){const e=["application/atom+xml","application/rss+xml","application/feed+json","application/activity+json"].map((e=>`link[type="${e}"]`)).join(",");return document.querySelectorAll(e)}(),o=function(){const e=["RSS","ATOM","JSON Feed","JsonFeed","feed"],n=e.map((e=>[`a[title*='${e}'i]`,`a[href*='${e}'i]`].join(","))).join(","),t=document.querySelectorAll(n);if(t.length<1)return null;const o=new RegExp(`\b(?:${e.map((e=>`(?:${e})`)).join("|")})\b`,"ig"),c=document.createDocumentFragment();c.append(...function*(e=t,n=o){for(const t of e){const e=t.cloneNode(!0),o=document.createElement("li");o.appendChild(e);const c=[t.href,t.title].filter((e=>null!=e)).map((e=>e.match(n))).filter((e=>null!=e)).map((e=>e[0].replace(/[\s]+/i,"-").toLowerCase()));c&&o.classList.add(...c),yield o}}(t));const l=document.createElement("ul");return l.append(c),l}();if(!t.length&&!o){return void alert("No feed links were found.")}const c=function(n){const t=document.createDocumentFragment(),o=document.createElement("ul");for(const t of Array.from(n)){const n=e(t),c=document.createElement("li");c.appendChild(n),o.appendChild(c)}return t.appendChild(o),t}(t);o&&c.append(o);const l=function(){const e=document.createElement("dialog");e.classList.add(n);const t=document.createElement("button");t.innerText="Close",e.append(t),t.addEventListener("click",(()=>{e.close(),e.remove()}),{once:!0,passive:!0});const o=document.body.querySelectorAll(`.${n}`);return o&&o.forEach((e=>e.remove())),e}();l.append(c),document.body.prepend(l),l.showModal()})();
+```
+
+## Go to Amazon Smile.js
+
+```javascript
+javascript:(()=>{const o=location.href.replace(/(?<=^https:\/\/)(?:[^.]+\.)?(amazon\.co(?:m|(?:\.[a-z]{2})))/i,"smile.$1");open(o,"_top")})();
+```
+
+## Hide Sponsored posts on Facebook.js
+
+```javascript
+javascript:(()=>{const e=document.body.querySelectorAll("[href*='utm_medium=paid_social']"),n=Array.from(e).map((e=>e.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement));n.forEach((e=>e&&!0===e.hidden)),console.log(n)})();
+```
+
+## Remove playlist params from YouTube video links.js
+
+```javascript
+javascript:(()=>{const e=document.body.querySelectorAll("a[href^='/watch?']"),r=["list","index"];for(const o of e){const e=new URL(o.href);r.forEach((r=>e.searchParams.delete(r))),o.href=e.href}})();
+```
+
+## YouTube convert Shorts link to regular.js
+
+```javascript
+javascript:(()=>{function o(o){console.debug("shorts URL",o);const e=o.match(/(?<root>https:\/\/(?:www\.)?youtube.com\/)shorts\/(?<videoId>[^/]+)/i);if(!e)return console.warn("This does not appear to be a YouTube Shorts URL"),o;if(e.groups){const o=e.groups.videoId;console.debug("video ID",o);const t=`${e.groups.root}watch?v=${e.groups.videoId}`;return console.debug("output URL",t),t}return o}!function(){const e=location.href,t=o(e);e!==t&&open(t)}(),function(){const e=document.body.querySelectorAll("a[href*='/shorts/']");for(const t of e){if(!t)continue;const e=o(t.href);t.href!==e&&(console.log(`replacing ${t.href} with ${e}`),t.href=e)}}()})();
+```
+
