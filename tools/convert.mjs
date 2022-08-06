@@ -43,8 +43,14 @@ async function updateMarkdown() {
 
     for await (const [name, bookmarklet] of readFilesContents(destinationDir)) {
         const url = `javascript:${bookmarklet.replace(/"/g, "&quot;")}`;
-        // outputParts.push(`[${name}](javascript:${url})`);
-        outputParts.push(`* <a href="${url}">${name}</a>`);
+        outputParts.push(
+            `## ${name}\n`, 
+            "```javascript",
+            `javascript:${url}`, 
+            "```\n");
+        
+        // GitHub will disable bookmarklet links, so this won't work.
+        // outputParts.push(`* <a href="${url}">${name}</a>`);
     }
 
     const output = outputParts.join("\n");
