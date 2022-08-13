@@ -24,6 +24,12 @@ javascript:!function(){const e=document.querySelectorAll("li.item-position");let
 javascript:(()=>{function e(e){const n=document.createElement("a");n.href=e.href;const t=document.createElement("code");return t.textContent=e.outerHTML,n.appendChild(t),n}const n="feeds-cc0a1783-0569-458e-89d1-28dd6872bbef",t=function(){const e=["application/atom+xml","application/rss+xml","application/feed+json","application/activity+json"].map((e=>`link[type="${e}"]`)).join(",");return document.querySelectorAll(e)}(),o=function(){const e=["RSS","ATOM","JSON Feed","JsonFeed","feed"],n=e.map((e=>[`a[title*='${e}'i]`,`a[href*='${e}'i]`].join(","))).join(","),t=document.querySelectorAll(n);if(t.length<1)return null;const o=new RegExp(`\b(?:${e.map((e=>`(?:${e})`)).join("|")})\b`,"ig"),c=document.createDocumentFragment();c.append(...function*(e=t,n=o){for(const t of e){const e=t.cloneNode(!0),o=document.createElement("li");o.appendChild(e);const c=[t.href,t.title].filter((e=>null!=e)).map((e=>e.match(n))).filter((e=>null!=e)).map((e=>e[0].replace(/[\s]+/i,"-").toLowerCase()));c&&o.classList.add(...c),yield o}}(t));const l=document.createElement("ul");return l.append(c),l}();if(!t.length&&!o){return void alert("No feed links were found.")}const c=function(n){const t=document.createDocumentFragment(),o=document.createElement("ul");for(const t of Array.from(n)){const n=e(t),c=document.createElement("li");c.appendChild(n),o.appendChild(c)}return t.appendChild(o),t}(t);o&&c.append(o);const l=function(){const e=document.createElement("dialog");e.classList.add(n);const t=document.createElement("button");t.innerText="Close",e.append(t),t.addEventListener("click",(()=>{e.close(),e.remove()}),{once:!0,passive:!0});const o=document.body.querySelectorAll(`.${n}`);return o&&o.forEach((e=>e.remove())),e}();l.append(c),document.body.prepend(l),l.showModal()})();
 ```
 
+## Get YouTube Subscription OPML.js
+
+```javascript
+javascript:import{createOpml}from"./modules/youtube/index.js";import{registerClosableDialog,dialogElementName}from"./modules/dialog.js";(()=>{try{window.customElements.get(dialogElementName)||registerClosableDialog();const e=createOpml(),t=new Blob([e],{type:"text/opml"}),l=URL.createObjectURL(t),o=document.createElement(dialogElementName),a=document.createElement("a");a.href=l,a.classList.add("opml"),a.text="YouTube subscriptions OPML",o.appendChild(a)}catch(e){alert("Could not generate OPML.")}})();
+```
+
 ## Go to Amazon Smile.js
 
 ```javascript

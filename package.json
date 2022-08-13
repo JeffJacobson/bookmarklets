@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "prepare": "tsc && npm run markdown",
+    "build-opml": "esbuild '.\\src\\Get YouTube Subscription OPML.ts' --minify --bundle --outfile=output.js",
     "lint": "eslint **/*.js --fix",
     "markdown": "node tools/convert.mjs"
   },
@@ -23,6 +24,7 @@
   },
   "homepage": "https://github.com/JeffJacobson/bookmarklets#readme",
   "devDependencies": {
+    "esbuild": "^0.14.53",
     "eslint": "^8.14.0",
     "minify": "^9.1.0",
     "typescript": "^4.7.4"
