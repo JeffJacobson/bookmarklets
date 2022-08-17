@@ -5,9 +5,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "prepare": "tsc && npm run markdown",
-    "build-opml": "esbuild '.\\src\\Get YouTube Subscription OPML.ts' --minify --bundle --outfile=output.js",
-    "lint": "eslint **/*.js --fix",
+    "prepare": "node tools/build.mjs",
+    "lint": "eslint **/*.ts --fix",
     "markdown": "node tools/convert.mjs"
   },
   "author": "Jeff Jacobson",
@@ -24,9 +23,13 @@
   },
   "homepage": "https://github.com/JeffJacobson/bookmarklets#readme",
   "devDependencies": {
+    "@types/semver": "^7.3.12",
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@typescript-eslint/parser": "^5.33.1",
     "esbuild": "^0.14.53",
     "eslint": "^8.14.0",
     "minify": "^9.1.0",
+    "semver": "^7.3.7",
     "typescript": "^4.7.4"
   }
 }

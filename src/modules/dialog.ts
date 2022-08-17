@@ -19,11 +19,9 @@ export class CloseableDialog extends HTMLDialogElement {
         });
         const { header, closeButton } = createHeader();
 
-        const dialog = this;
-
         closeButton.addEventListener("click", () => {
-            dialog.close();
-            dialog.remove();
+            this.close();
+            this.remove();
         }, {
             once: true,
             passive: true

@@ -20,6 +20,21 @@
 				"kind": "build",
 				"isDefault": true
 			}
+		},
+		{
+			"type": "npm",
+			"script": "lint",
+			"group": "test",
+			"icon": {
+				"id": "checklist",
+				"color": "terminal.ansiCyan"
+			},
+			"problemMatcher": [
+				"$eslint-compact",
+				"$eslint-stylish"
+			],
+			"label": "ESLint",
+			"detail": "Lints TypeScript files using ESLint and fixes when possible"
 		}
 	]
 }

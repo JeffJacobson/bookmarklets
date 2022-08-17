@@ -24,7 +24,7 @@ export function convertToFeedLink(channelUrl: string | URL) {
     // https://www.youtube.com/channel/UC25J6ueIa1L2NTqbbAeGN7A
     // https://www.youtube.com/feeds/videos.xml?channel_id=UC25J6ueIa1L2NTqbbAeGN7A
 
-    let url = typeof channelUrl === "string" ? new URL(channelUrl) : channelUrl;
+    const url = typeof channelUrl === "string" ? new URL(channelUrl) : channelUrl;
 
     // Get the end part of the URL which will be the channel ID.
     const parts = url.pathname.split("/");
