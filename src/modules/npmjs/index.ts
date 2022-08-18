@@ -1,7 +1,6 @@
 // https://www.npmjs.com/package/the-package-name
 
 import FormatError from "../FormatError.js";
-import { SemVer } from "semver";
 
 // https://www.npmjs.com/package/@org-name/the-package-name
 export const npmPackageUrlRe =
@@ -54,15 +53,15 @@ const versionNumberRe = /^(?<version>(?:\d+\.)+(?:\d+))(?:[-.](?<label>\S*))?/;
 function toVersion(
   matchOrString: RegExpMatchArray | string,
   throwOnError: true
-): SemVer;
+): string;
 function toVersion(
   matchOrString: RegExpMatchArray | string,
   throwOnError: false
-): SemVer | null;
+): string | null;
 function toVersion(
   matchOrString: RegExpMatchArray | string,
   throwOnError: boolean
-): SemVer | null {
+): string | null {
   let match: RegExpMatchArray | null;
   if (typeof matchOrString === "string") {
     match = matchOrString.match(versionNumberRe);
@@ -76,15 +75,22 @@ function toVersion(
   } else {
     match = matchOrString;
   }
-  const semVer = new SemVer(match[0]);
+  const semVer = match[0];
   return semVer;
 }
 
 export function getVersionNumberFromPage() {
   // Get text from spans.
-  const versionNumber = document.querySelector("main > #top > div:nth-child(1) > span:nth-child(2)")?.textContent?.match(/^\S+/)?.at(0) || null;
-  if (!versionNumber) return null;
-  return new SemVer(versionNumber);
+  const versionNumber =
+    document
+      .querySelector("main > #top > div:nth-child(1) > span:nth-child(2)")
+      ?.textContent?.match(/^\S+/)
+      ?.at(0) || null;
+  if (!versionNumber) {
+    return null;
+  } else {
+    return toVersion(versionNumber, false);
+  }
 }
 
 export function getYarnUrl(
@@ -97,7 +103,9 @@ export function getYarnUrl(
   return new URL(url.pathname, newUrlBase);
 }
 
-export type CdnUrlRoots = "https://cdn.jsdelivr.net/npm/" | "https://unpkg.com/";
+export type CdnUrlRoots =
+  | "https://cdn.jsdelivr.net/npm/"
+  | "https://unpkg.com/";
 
 /**
  * Converts an NPM URL into a JSDelivr URL.
@@ -123,7 +131,6 @@ export function getCdnUrl(npmUrl: string | URL, rootUrl: CdnUrlRoots): URL {
   // https://unpkg.com/browse/@wsdot/elc-ui@4.0.0-0/
   // The "@..."" portion can be removed from URL to go to the latest version.
 
-
   const pathNameParts = [];
   if (org) {
     pathNameParts.push(`@${org.replace(/^@/, "")}`);
@@ -139,4 +146,3 @@ export function getCdnUrl(npmUrl: string | URL, rootUrl: CdnUrlRoots): URL {
   }
   return new URL(pathName, rootUrl);
 }
-

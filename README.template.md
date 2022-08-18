@@ -6,4 +6,4 @@ To use, drag the links below up to your browsers bookmarks toolbar.
 
 [Bookmarklets on Wikipedia]:https://en.wikipedia.org/wiki/Bookmarklet
 
-{{bookmarklets}}
+<!-- Bookmarklets will be written below. -->

@@ -15,7 +15,7 @@
 			"script": "prepare",
 			"problemMatcher": [],
 			"label": "npm: prepare",
-			"detail": "tsc && npm run markdown",
+			"detail": "Build the TypeScript files into bookmarklets",
 			"group": {
 				"kind": "build",
 				"isDefault": true
@@ -35,6 +35,17 @@
 			],
 			"label": "ESLint",
 			"detail": "Lints TypeScript files using ESLint and fixes when possible"
+		},
+		{
+			"label": "Serve HTML",
+			"detail": "Serves the HTML page using dotnet-serve",
+			"type": "shell",
+			"command": "dotnet serve -oq --directory dist",
+			"icon": {
+				"id": "browser",
+				"color": "terminal.ansiYellow"
+			},
+			"problemMatcher": []
 		}
 	]
 }
