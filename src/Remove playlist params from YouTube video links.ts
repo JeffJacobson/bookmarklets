@@ -8,15 +8,18 @@
 // https://www.youtube.com/watch?v=TheVideoId&list=WL&index=5
 if (/\w+\.youtube\.com/i.test(location.hostname)) {
   const currentUrl = new URL(location.href);
-  ["list", "index"].forEach((key) => {
-    currentUrl.searchParams.delete(key);
-  });
-  if (
-    window.confirm(
-      "Are you sure you want to reload this page without the playlist?"
-    )
-  ) {
-    open(currentUrl);
+  
+  if (currentUrl.searchParams.has("v")) {
+    ["list", "index"].forEach((key) => {
+      currentUrl.searchParams.delete(key);
+    });
+    if (
+      window.confirm(
+        "Are you sure you want to reload this page without the playlist?"
+      )
+    ) {
+      open(currentUrl, "self");
+    }
   }
 }
 
