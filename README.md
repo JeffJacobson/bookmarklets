@@ -35,7 +35,13 @@ javascript:(()=>{function g(){let n=["application/atom+xml","application/rss+xml
 ## Get all video links on NHK World page
 
 ```javascript
-javascript:(()=>{var d=/.+\/ondemand\/video\/\d+\b/gi;function c(){return[...new Set([...document.body.querySelectorAll("a[href*='ondemand/video/']")].filter(e=>d.test(e.href)).map(e=>`"${e.href}"`))]}function a(e){if(!e||e.length<0){alert(`Failed to find any URLs matching the pattern "${d.source}".`);return}let t=document.createElement("dialog"),o=document.createElement("code");o.textContent=`yt-dlp ${e.join(" ")}`;let n=document.createElement("button");n.textContent="Close",t.append(o,n),document.body.appendChild(t),n.addEventListener("click",()=>{t.close(),t.remove()}),t.showModal()}var l=c();a(l);})();
+javascript:(()=>{var d=/.+\/ondemand\/video\/\d+\b/gi;function a(){return[...new Set([...document.body.querySelectorAll("a[href*='ondemand/video/']")].filter(e=>d.test(e.href)).map(e=>`"${e.href}"`))]}function l(e){if(!e||e.length<0){alert(`Failed to find any URLs matching the pattern "${d.source}".`);return}let t=document.createElement("dialog"),n=document.createElement("code");n.classList.add("language-shell"),n.textContent=`yt-dlp ${e.join(" ")}`;let o=document.createElement("button");o.textContent="Close",t.append(n,o),document.body.appendChild(t),o.addEventListener("click",()=>{t.close(),t.remove()}),t.showModal()}var c=a();l(c);})();
+```
+
+## Get Bandcamp track pages
+
+```javascript
+javascript:(()=>{var c="li[data-item-id]";function l(t){let{itemId:r,bandId:e}=t.dataset,o=t.querySelector("a"),s=t.querySelector("p"),n=o?.href,a=s?.innerText.trim();return{itemId:r,bandId:e,title:a,url:n}}function*m(t){for(let r of t){let e=l(r);e.url!=null?yield e:console.warn("List item does not appear to have a valid URL.",e)}}async function i(t){let e=await(await fetch(t)).text(),n=new DOMParser().parseFromString(e,"text/html").querySelectorAll(c);return m(n)}(async()=>{let t=await i(location.href);for(let r of t)console.log(r.url)})();})();
 ```
 
 ## Get Runtimes from playlist
