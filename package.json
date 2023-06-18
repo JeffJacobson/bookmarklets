@@ -24,18 +24,18 @@
   "homepage": "https://jeffjacobson.github.io/bookmarklets",
   "devDependencies": {
     "@types/gh-pages": "^3.2.1",
-    "@types/jsdom": "^21.1.0",
-    "@types/node": "^18.14.4",
-    "@types/semver": "^7.3.13",
-    "@typescript-eslint/eslint-plugin": "^5.54.0",
-    "@typescript-eslint/parser": "^5.54.0",
-    "esbuild": "^0.17.10",
-    "eslint": "^8.35.0",
+    "@types/jsdom": "^21.1.1",
+    "@types/node": "^20.3.1",
+    "@types/semver": "^7.5.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.11",
+    "@typescript-eslint/parser": "^5.59.11",
+    "esbuild": "^0.18.4",
+    "eslint": "^8.43.0",
     "gh-pages": "^5.0.0",
-    "jsdom": "^21.1.0",
-    "minify": "^9.2.0",
-    "semver": "^7.3.8",
+    "jsdom": "^22.1.0",
+    "minify": "^10.2.0",
+    "semver": "^7.5.2",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.5"
+    "typescript": "^5.1.3"
   }
 }
