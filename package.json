@@ -5,8 +5,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "prepare": "ts-node --esm tools/build.mts",
-    "publish": "ts-node --esm tools/publish.mts",
+    "prepare": "node --loader ts-node/esm tools/build.mts",
+    "publish": "node --loader ts-node/esm tools/publish.mts",
     "lint": "eslint **/*.ts --fix"
   },
   "author": "Jeff Jacobson",
