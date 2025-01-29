@@ -63,16 +63,18 @@ javascript:(()=>{function c(e){let o=typeof e=="string"?new URL(e):e,t=o.pathnam
 javascript:(()=>{var t=[...document.body.querySelectorAll(".octicon-git-pull-request-closed")].map(e=>e.parentElement?.parentElement?.parentElement?.parentElement?.querySelector("input[type=checkbox]"));for(let e of t)e&&(e.checked=!0);})();
 ```
 
-## Go to Amazon Smile
-
-```javascript
-javascript:(()=>{var o=/(?<=^https:\/\/)(?:[^.]+\.)?(amazon\.co(?:m|(?:\.[a-z]{2})))/i,a=location.href.replace(o,"smile.$1");open(a,"_top");})();
-```
-
 ## Hide Sponsored posts on Facebook
 
 ```javascript
 javascript:(()=>{var n=document.body.querySelectorAll("[href*='utm_medium=paid_social']"),t=Array.from(n).map(e=>e.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement);t.forEach(e=>e&&e.hidden===!0);console.log(t);})();
+```
+
+## List NHK Show links
+
+```javascript
+javascript:(()=>{var e=document.body.querySelectorAll("article[id^='shows_program_episodes'] a");function t({href:o,text:n}){return[n||o,o]}function*r(o){for(let n of o)yield t(n)}var s=[...r(e)].map(([o,n])=>`# ${o}\r
+${n}`).join(`\r
+`);console.log(s);alert("yt-dlp list written to console");})();
 ```
 
 ## Remove playlist params from YouTube video links
